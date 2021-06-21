@@ -22,6 +22,8 @@ url: "https://remove-to-waste.info" # the base hostname & protocol for your site
 
 github_username:  theimpossibleastronaut
 
+repo_url: "https://github.com/theimpossibleastronaut/rmw-website"
+
 # Build settings
 markdown: kramdown
 

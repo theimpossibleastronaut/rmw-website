@@ -12,8 +12,8 @@ The website is generated using [jekyll](https://jekyllrb.com/).
 
 ## jekyll
 
-The site is published from the [docs/
-directory](https://github.com/theimpossibleastronaut/rmw/tree/master/docs)
+The site is published from the [root
+directory]({{ site.repo_url }}/tree/trunk)
 using [GitHub pages](https://pages.github.com/). The frameworks used
 are [W3.CSS](https://www.w3schools.com/w3css/default.asp) and [Font
 Awesome](https://fontawesome.com/).
