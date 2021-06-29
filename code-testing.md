@@ -19,7 +19,8 @@ To test using [valgrind](https://www.valgrind.org/) (from the build dir):
 
 <h2 id="env_vars">Environmental Variables</h2>
 <div class="w3-panel w3-border">
-  <p><b>RMW_FAKE_HOME</b></p>
+  <p><b>RMW_FAKE_HOME</b> (v0.8.0)<br />
+  (replaces RMWTEST_HOME, introduced in v0.7.03)</p>
 Instead of using $HOME, rmw will use $RMW_FAKE_HOME. The configuration
 file and default waste directory will be written relative to
 $RMW_FAKE_HOME.
@@ -35,7 +36,8 @@ system as *$PWD/footest* will be moved to the waste directories under
 </div>
 
 <div class="w3-panel w3-border">
-<p><b>RMW_FAKE_YEAR</b></p>
+<p><b>RMW_FAKE_YEAR</b> (v0.7.07)<br />
+(replaces RMWTRASH=fake-year, introduced in v0.4.01)</p>
 
 If set to *true* when rmw'ing a file, the year 1999 will be written to
 the DeletionDate value in the .trashinfo file (for testing the purge
@@ -50,7 +52,7 @@ permanently delete them.
 </div>
 
 <div class="w3-panel w3-border">
-<p><b>RMW_FAKE_MEDIA_ROOT</b></p>
+<p><b>RMW_FAKE_MEDIA_ROOT</b> (v0.7.07)</p>
 
 If set to **true** when rmw-ing a file, relative paths will be written
 to the Path key of a .trashinfo file. rmw is faked into believing that
