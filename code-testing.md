@@ -9,9 +9,10 @@ layout: default
 
 <h2 id="general_testing">General Testing</h2>
 
-If you're writing a patch, using <code class="w3-codespan">make
-check</code> will cover most of rmw's operations. If there's a test
-missing, please open a ticket.
+Using <code class="w3-codespan">ninja test</code> and <code
+class="w3-codespan">meson test --setup=fake_media_root</code> will
+cover most of rmw's operations. If there's a test missing, please open
+a ticket.
 
 To test using [valgrind](https://www.valgrind.org/) (from the build dir):
 
