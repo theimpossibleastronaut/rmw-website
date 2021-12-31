@@ -55,6 +55,7 @@ layout: default
 
 <h2>Press and Reviews</h2>
 <ul>
+  <li><a href="https://openwebcraft.com/til-rmw-remove-to-waste/">review</a> by <a href="https://openwebcraft.com/about/">Matthias</a></li>
   <li>rmw was reviewed on page 90 of <a href="https://shop.heise.de/ct-25-2019/PDF">c't 25/2019</a> (German tech magazine)</li>
   <li><a href="https://linuxreviews.org/Rmw">rmw on LinuxReviews</a></li>
 </ul>
