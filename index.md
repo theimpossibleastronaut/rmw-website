@@ -14,12 +14,6 @@ layout: default
   ability to purge items from your waste (or trash) directories after x
   number of days.</p>
 
-  <p class="w3-right">
-    <a href="https://repology.org/project/rmw/versions">
-      <img src="https://repology.org/badge/vertical-allrepos/rmw.svg" alt="Packaging status">
-    </a>
-  </p>
-
   <p>
   rmw is written in C, open source, and has a <a href="https://github.com/theimpossibleastronaut/rmw/blob/master/COPYING">GNU
   GPLv3 License</a>.
