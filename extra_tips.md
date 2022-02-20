@@ -3,10 +3,6 @@ title: Extra Tips
 layout: default
 ---
 
-**To increase verbosity from make**
-
-make V=1
-
 **To view disk usage used by the files in the Waste directories**
 
 Warning: this could take a long time to run if you have a lot of items in your waste directories.
