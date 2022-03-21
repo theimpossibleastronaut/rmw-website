@@ -44,7 +44,7 @@ layout: default
   <li><span class="fas fa-bug fa-fw"></span>&nbsp;The <a href="https://github.com/theimpossibleastronaut/rmw/issues">GitHub rmw issues section</a> for bug reports</li>
   <li><span class="fas fa-comments fa-fw"></span>&nbsp;<a href="https://github.com/theimpossibleastronaut/rmw/discussions">GitHub Discussions</a> for feature requests, help, and general discussion about rmw</li>
   <li><span class="fas fa-rss fa-fw"></span>&nbsp;<a href="https://github.com/theimpossibleastronaut/rmw/releases.atom">RSS feed for new releases</a></li>
-  <li><span class="fas fa-at fa-fw"></span>&nbsp;Maintainer: <a href="https://github.com/andy5995/">Andy Alt</a> (andy400-dev [at] yahoo.com)</li>
+  <li><span class="fas fa-at fa-fw"></span>&nbsp;Maintainer: <a href="https://github.com/andy5995/">Andy Alt</a> (arch_stanton5995 [at] protonmail.com)</li>
 </ul>
 
 <h2>Press and Reviews</h2>

@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: rmw (Remove to Waste)
-email: andy400-dev@yahoo.com
+email: arch_stanton5995@protonmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   safe-remove utility for the command line
 baseurl: "" # the subpath of your site, e.g. /blog
