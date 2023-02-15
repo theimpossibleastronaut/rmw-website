@@ -14,10 +14,6 @@ class="w3-codespan">meson test --setup=fake_media_root</code> will
 cover most of rmw's operations. If there's a test missing, please open
 a ticket.
 
-To test using [valgrind](https://www.valgrind.org/) (from the build dir):
-
-<code class="w3-codespan">meson test --setup=valgrind</code>
-
 <h2 id="env_vars">Environmental Variables</h2>
 <div class="w3-panel w3-border">
   <p><b>RMW_FAKE_HOME</b> (v0.8.0)<br />
