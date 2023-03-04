@@ -5,14 +5,14 @@ layout: default
 
 <div class="w3-container">
 
-  <p>rmw (ReMove to Waste) is a safe-remove utility for the command line.
-  It can move and restore files to and from directories specified in a
-  configuration file, and can also be integrated with your regular
-  desktop trash folder (if your desktop environment uses the (<a
+  <p>rmw (ReMove to Waste) is a trashcan/recycle bin utility for the command
+  line. It can move and restore files to and from directories specified in a
+  configuration file, and can also be integrated with your regular desktop
+  trash folder (if your desktop environment uses the (<a
   href="https://specifications.freedesktop.org/trash-spec/trashspec-latest.html">FreeDesktop.org
-  Trash specification</a>). One of the unique features of rmw is the
-  ability to purge items from your waste (or trash) directories after x
-  number of days.</p>
+  Trash specification</a>). One of the unique features of rmw is the ability
+  to purge items from your waste (or trash) directories after x number of
+  days.</p>
 
   <p>
   rmw is written in C, open source, and has a <a href="https://github.com/theimpossibleastronaut/rmw/blob/master/COPYING">GNU
@@ -44,7 +44,7 @@ layout: default
   <li><span class="fas fa-bug fa-fw"></span>&nbsp;The <a href="https://github.com/theimpossibleastronaut/rmw/issues">GitHub rmw issues section</a> for bug reports</li>
   <li><span class="fas fa-comments fa-fw"></span>&nbsp;<a href="https://github.com/theimpossibleastronaut/rmw/discussions">GitHub Discussions</a> for feature requests, help, and general discussion about rmw</li>
   <li><span class="fas fa-rss fa-fw"></span>&nbsp;<a href="https://github.com/theimpossibleastronaut/rmw/releases.atom">RSS feed for new releases</a></li>
-  <li><span class="fas fa-at fa-fw"></span>&nbsp;Maintainer: <a href="https://github.com/andy5995/">Andy Alt</a> (arch_stanton5995 [at] protonmail.com)</li>
+  <li><span class="fas fa-at fa-fw"></span>&nbsp;Maintainer: <a href="https://github.com/andy5995/">Andy Alt</a> (arch_stanton5995 [at] proton.me)</li>
 </ul>
 
 <h2>Press and Reviews</h2>
