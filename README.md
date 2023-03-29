@@ -1,4 +1,4 @@
-This is the repository for the [rmw website](https://remove-to-waste.info/).
+This is the repository for the [rmw website](https://theimpossibleastronaut.github.io/rmw-website/).
 
 The source code repository for rmw is at
 https://github.com/theimpossibleastronaut/rmw
@@ -15,4 +15,4 @@ installed, run:
 and in your web browser, navigate to http://localhost:4000/
 
 Information for contributors about working on the website can be found
-at https://remove-to-waste.info/website-design.html
+at https://theimpossibleastronaut.github.io/rmw-website/website-design.html
