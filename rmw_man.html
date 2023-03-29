@@ -1,0 +1,408 @@
+---
+title: rmw manual
+layout: default
+---
+<!-- Creator     : groff version 1.22.4 -->
+<!-- CreationDate: Wed Mar 29 04:34:05 2023 -->
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">rmw &minus;
+safe-remove utility for the command line</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>rmw</b>
+[<i>OPTION</i>]... <i>FILE</i>...</p>
+
+<p style="margin-left:11%; margin-top: 1em">Move FILE(s) to
+a WASTE directory listed in configuration file</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>rmw &minus;s
+<br>
+rmw &minus;u <br>
+rmw &minus;z</b> FILE...</p>
+
+<p style="margin-left:11%; margin-top: 1em">Restore FILE(s)
+from a WASTE directory</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">rmw (ReMove to
+Waste) is a trashcan/recycle bin utility for the command
+line. It can move and restore files to and from directories
+specified in a configuration file, and can also be
+integrated with your regular desktop trash folder (if your
+desktop environment uses the FreeDesktop.org Trash
+specification). One of the unique features of rmw is the
+ability to purge items from your waste (or trash)
+directories after x number of days.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>&minus;h</b>,
+<b>&minus;&minus;help</b></p>
+
+<p style="margin-left:22%;">show help for command line
+options</p>
+
+<p style="margin-left:11%;"><b>&minus;c</b>,
+<b>&minus;&minus;config</b> FILE</p>
+
+<p style="margin-left:22%;">use an alternate
+configuration</p>
+
+<p style="margin-left:11%;"><b>&minus;l</b>,
+<b>&minus;&minus;list</b></p>
+
+<p style="margin-left:22%;">list waste directories</p>
+
+<p style="margin-left:11%;"><b>&minus;g[N_DAYS]</b>,
+<b>&minus;&minus;purge</b>[=<i>N_DAYS</i>]</p>
+
+<p style="margin-left:22%;">purge expired files; optional
+argument &rsquo;N_DAYS&rsquo; overrides
+&rsquo;expire_age&rsquo; value from the configuration file
+(Examples: <b>&minus;g90</b>,
+<b>&minus;&minus;purge</b>=<i>90</i>)</p>
+
+<p style="margin-left:22%; margin-top: 1em">By default,
+purging is disabled (&rsquo;expire_age&rsquo; is set to
+&rsquo;0&rsquo; in the configuration file). To enable, set
+the &rsquo;expire_age&rsquo; value in your config file to a
+value greater than &rsquo;0&rsquo;</p>
+
+<p style="margin-left:22%; margin-top: 1em">You can use
+&rsquo;-vvg&rsquo; to see when the remaining files in the
+waste directories will expire.</p>
+
+<p style="margin-left:11%;"><b>&minus;o</b>,
+<b>&minus;&minus;orphaned</b></p>
+
+<p style="margin-left:22%;">check for orphaned files
+(maintenance)</p>
+
+<p style="margin-left:22%; margin-top: 1em">An orphan is an
+item in a waste directory that has no corresponding
+<b>.trashinfo</b> file, or vice versa. This option is
+intended primarily for developers. Orphans may happen while
+testing code changes or if rmw is unintentionally released
+with a bug. <br>
+(see also:
+&lt;https://remove-to-waste.info/faq.html#dot_trashinfo&gt;)</p>
+
+<p style="margin-left:11%;"><b>&minus;f</b>,
+<b>&minus;&minus;force</b></p>
+
+<p style="margin-left:22%;">allow purging of expired
+files</p>
+
+<p style="margin-left:22%; margin-top: 1em">By default,
+force is not required to enable the purge feature. If you
+would like to require it, add &rsquo;force_required&rsquo;
+to your config file.</p>
+
+<p style="margin-left:11%;"><b>&minus;&minus;empty</b></p>
+
+<p style="margin-left:22%;">completely empty (purge) all
+waste directories</p>
+
+<p style="margin-left:11%;"><b>&minus;r</b>,
+<b>&minus;R</b>, <b>&minus;&minus;recursive</b></p>
+
+<p style="margin-left:22%;">option used for compatibility
+with rm (recursive operation is enabled by default)</p>
+
+
+<p style="margin-left:11%;"><b>&minus;&minus;top-level-bypass</b></p>
+
+<p style="margin-left:22%;">bypass protection of top-level
+files (added in v0.9.0)</p>
+
+<p style="margin-left:11%;"><b>&minus;v</b>,
+<b>&minus;&minus;verbose</b></p>
+
+<p style="margin-left:22%;">increase output messages</p>
+
+<p style="margin-left:11%;"><b>&minus;w</b>,
+<b>&minus;&minus;warranty</b></p>
+
+<p style="margin-left:22%;">display warranty</p>
+
+<p style="margin-left:11%;"><b>&minus;V</b>,
+<b>&minus;&minus;version</b></p>
+
+<p style="margin-left:22%;">display version and license
+information</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>RESTORING</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="32%">
+
+
+<p><b>&minus;z</b>, <b>&minus;&minus;restore</b>
+FILE(s)</p> </td>
+<td width="57%">
+</td></tr>
+</table>
+
+<p style="margin-left:22%; margin-top: 1em">To restore
+items, specify the path to them in the &lt;WASTE&gt;/files
+directory (wildcards ok).</p>
+
+<p style="margin-left:22%; margin-top: 1em">When restoring
+an item, if a file or directory with the same name already
+exists at the destination, the item being restored will have
+a time/date string (formatted as &quot;_%H%M%S-%y%m%d&quot;)
+appended to it (e.g. &rsquo;foo_164353-210508&rsquo;).</p>
+
+<p><b>&minus;s</b>, <b>&minus;&minus;select</b></p></table>
+
+<p style="margin-left:22%;">select files from list to
+restore</p>
+
+<p style="margin-left:22%; margin-top: 1em">Displays a list
+of items in your waste directories. You can use the
+left/right cursor keys to switch between waste directories.
+Use the space bar to select the items you wish to restore,
+then press enter to restore all selected items.</p>
+
+<p style="margin-left:11%;"><b>&minus;u</b>,
+<b>&minus;&minus;undo&minus;last</b></p>
+
+<p style="margin-left:22%;">undo last move</p>
+
+<p style="margin-left:22%; margin-top: 1em">Restores files
+that were last rmw&rsquo;ed</p>
+
+<p style="margin-left:11%;"><b>&minus;m</b>,
+<b>&minus;&minus;most&minus;recent&minus;list</b></p>
+
+<p style="margin-left:22%;">list most recently rmw&rsquo;ed
+files</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">These variables
+are intended only to be used for testing. See the
+code-testing page on the rmw website for more details.
+<b><br>
+RMW_FAKE_HOME <br>
+RMW_FAKE_YEAR <br>
+RMW_FAKE_MEDIA_ROOT</b></p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">On some
+systems, $HOME/.config and $HOME/.local/share may be
+replaced with $XDG_CONFIG_HOME and $XDG_DATA_HOME <i><br>
+$HOME/.config/rmwrc</i></p>
+
+<p style="margin-left:22%;">configuration file</p>
+
+
+<p style="margin-left:11%;"><i>$HOME/.local/share/rmw/purge-time</i></p>
+
+<p style="margin-left:22%;">text file that stores the time
+of the last purge</p>
+
+
+<p style="margin-left:11%;"><i>$HOME/.local/share/rmw/mrl</i></p>
+
+<p style="margin-left:22%;">text file containing a list of
+items that were last rmw&rsquo;ed</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">rmw will not
+move items from one file system to another. If you try to
+rmw a file but don&rsquo;t have a waste directory defined in
+your configuration file that matches the file system on
+which it resides, rmw will refuse to do anything with
+it.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>DESKTOP
+INTEGRATION</b> <br>
+Items will be moved to a waste basket in the same manner as
+when using the &quot;move to trash&quot; option from your
+desktop GUI. They will be separated from your desktop trash
+by default; or if you wish for them to share the same
+&quot;trash&quot; directory, uncomment the line (in your
+config file):</p>
+
+<p style="margin-left:11%; margin-top: 1em">(Note that this
+does not apply to MacOS; while rmw is yet unable to
+integrate with the desktop trash directory, you&rsquo;ll
+still be able to use the default Waste directory.)</p>
+
+<p style="margin-left:22%; margin-top: 1em">WASTE =
+$HOME/.local/share/Trash</p>
+
+<p style="margin-left:11%; margin-top: 1em">then comment
+out the line</p>
+
+<p style="margin-left:22%; margin-top: 1em">WASTE =
+$HOME/.local/share/Waste</p>
+
+<p style="margin-left:11%; margin-top: 1em">You can reverse
+which directories are enabled at any time if you ever change
+your mind. If both directories are on the same filesystem,
+rmw will use the directory listed first in your config
+file.</p>
+
+<p style="margin-left:11%; margin-top: 1em">It can be
+beneficial to have them both uncommented. If your desktop
+trash directory (~/.local/share/Trash) is listed after the
+rmw default (~/.local/share/Waste) and uncommented, rmw will
+place newly rmw&rsquo;ed items into the default, and it will
+purge expired files from both.</p>
+
+<p style="margin-left:11%; margin-top: 1em">When
+rmw&rsquo;ing an item, if a file or directory with the same
+name already exists in the waste (or trash) directory, it
+will not be overwritten; instead, the current file being
+rmw&rsquo;ed will have a time/date string (formatted as
+&quot;_%H%M%S-%y%m%d&quot;) appended to it (e.g.
+&rsquo;foo_164353-210508&rsquo;).</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>REMOVABLE
+MEDIA</b> <br>
+The first time rmw is run, it will create a configuration
+file. Waste directories will be created automatically
+(Except for when the &rsquo;,removable&rsquo; option is
+used; see below) e.g., if
+&rsquo;$HOME/.local/share/Waste&rsquo; is uncommented in the
+config file, these two directories will be created:</p>
+
+
+<p style="margin-left:22%; margin-top: 1em">$HOME/.local/share/Waste/files
+<br>
+$HOME/.local/share/Waste/info</p>
+
+<p style="margin-left:11%; margin-top: 1em">If a WASTE
+directory is on removable media, you may append
+&rsquo;,removable&rsquo;. In that case, rmw will not try to
+create it; it must be initially created manually. When rmw
+runs, it will check to see if the directory exists (which
+means the removable media containing the directory is
+currently mounted). If rmw can&rsquo;t find the directory,
+it is assumed the media containing the directory isn&rsquo;t
+mounted and that directory will not be used for the current
+run of rmw.</p>
+
+<p style="margin-left:11%; margin-top: 1em">With the media
+mounted, once you manually create the waste directory for
+that device (e.g. &quot;/mnt/flash/.Trash-$UID&quot;) and
+run rmw, it will automatically create the two required child
+directories &quot;files&quot; and &quot;info&quot;.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>RESTORING</b>
+<br>
+rmw -z ~/.local/share/Waste/files/foo <br>
+rmw -z ~/.local/share/Waste/files/bars*</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>CONFIGURATION</b>
+<br>
+WASTE=/mnt/flash/.Trash-$UID, removable</p>
+
+<p style="margin-left:22%;">When using the removable
+attribute, you must also manually create the directory</p>
+
+<p style="margin-left:11%;">expire_age = 45</p>
+
+<p style="margin-left:22%;">rmw will permanently delete
+files that have been in the waste (or trash) for more than
+45 days.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Project
+Manager: Andy Alt <br>
+The RMW team: see AUTHORS.md</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Report bugs to
+&lt;https://github.com/theimpossibleastronaut/rmw/issues&gt;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Copyright
+&copy; 2012-2023 Andy Alt</p>
+
+<p style="margin-left:11%; margin-top: 1em">License GPLv3+:
+GNU GPL version 3 or later
+&lt;https://gnu.org/licenses/gpl.html&gt;. <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">mv(1), rm(1),
+rmdir(1)</p>
+
+<p style="margin-left:11%; margin-top: 1em">Full
+documentation at: &lt;https://remove-to-waste.info/&gt;</p>
+<hr>

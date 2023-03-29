@@ -24,11 +24,11 @@ layout: default
   fa-fw"></span>&nbsp;<a href="https://github.com/theimpossibleastronaut/rmw/blob/master/AUTHORS.md">Authors/Credits</a>
   </p>
 
-  <p>A list of features and instructions for usage, building, and
-  installing are documented in the <a
+  <p>A list of features and instructions for usage, building, and installing
+  are documented in the <a
   href="https://github.com/theimpossibleastronaut/rmw/blob/master/README.md">README</a>
-  and man page. More detailed information is contained on this
-  website.</p>
+  and <a href="rmw_man.html">man page</a>. More detailed information is
+  contained on this website.</p>
 </div>
 
 ## How To:
