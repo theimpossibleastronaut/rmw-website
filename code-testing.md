@@ -49,7 +49,7 @@ permanently delete them.
 </div>
 
 <div class="w3-panel w3-border">
-<p><b>RMW_FAKE_MEDIA_ROOT</b> (v0.7.07)</p>
+<p><b>RMW_FAKE_MEDIA_ROOT</b> (v0.7.07)(removed in v0.9.3)</p>
 
 If set to **true** when rmw-ing a file, relative paths will be written
 to the Path key of a .trashinfo file. rmw is faked into believing that
