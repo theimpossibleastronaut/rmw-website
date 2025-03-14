@@ -22,7 +22,7 @@ group :jekyll_plugins do
   # gem "jekyll-feed", "~> 0.6"
 end
 
-gem 'json', '~> 2.3'
+gem 'json', '~> 2.10'
 
 gem 'rexml', '~> 3.3.9'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
