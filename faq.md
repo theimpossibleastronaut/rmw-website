@@ -115,8 +115,9 @@ risk remains: you could restore a file at the same moment the job
 deletes it. Desktop trash cleaners have the same small risk.
 
 To stop the log file from growing forever, use logrotate. The log is
-in your home directory, so use your own logrotate configuration file,
-for example *~/.config/rmw/logrotate.conf*. Write the full path to the
+in your home directory, so use your own logrotate configuration file.
+A good place for it is rmw's data directory, which already exists:
+*~/.local/share/rmw/logrotate.conf*. Write the full path to the
 log file; logrotate does not understand <code
 class="w3-codespan">$HOME</code>:
 
@@ -133,5 +134,5 @@ class="w3-codespan">$HOME</code>:
 and run it from the same crontab:
 
 <p class="w3-code">
-  0 5 * * 0 logrotate --state "$HOME/.local/state/logrotate-rmw.state" "$HOME/.config/rmw/logrotate.conf"
+  0 5 * * 0 logrotate --state "$HOME/.local/state/logrotate-rmw.state" "$HOME/.local/share/rmw/logrotate.conf"
 </p>
