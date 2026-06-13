@@ -3,8 +3,7 @@ title: rmw manual
 layout: default
 ---
 <!-- Creator     : groff version 1.24.1 -->
-<!-- CreationDate: Wed Apr  8 04:31:08 2026 -->
-
+<!-- CreationDate: Fri Jun 12 20:42:38 2026 -->
 <h1 align="center">RMW</h1>
 
 <a href="#NAME">NAME</a><br>
@@ -12,14 +11,15 @@ layout: default
 <a href="#DESCRIPTION">DESCRIPTION</a><br>
 <a href="#OPTIONS">OPTIONS</a><br>
 <a href="#RESTORING">RESTORING</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
 <a href="#ENVIRONMENT">ENVIRONMENT</a><br>
 <a href="#FILES">FILES</a><br>
 <a href="#NOTES">NOTES</a><br>
 <a href="#DESKTOP INTEGRATION">DESKTOP INTEGRATION</a><br>
 <a href="#REMOVABLE MEDIA">REMOVABLE MEDIA</a><br>
+<a href="#BTRFS AND BCACHEFS">BTRFS AND BCACHEFS</a><br>
 <a href="#EXAMPLES">EXAMPLES</a><br>
 <a href="#RESTORING">RESTORING</a><br>
-<a href="#CONFIGURATION">CONFIGURATION</a><br>
 <a href="#AUTHORS">AUTHORS</a><br>
 <a href="#REPORTING BUGS">REPORTING BUGS</a><br>
 <a href="#COPYRIGHT">COPYRIGHT</a><br>
@@ -107,6 +107,24 @@ value greater than &rsquo;0&rsquo;</p>
 <p style="margin-left:15%; margin-top: 1em">You can use
 &rsquo;-vvg&rsquo; to see when the remaining files in the
 waste directories will expire.</p>
+
+<p style="margin-left:15%; margin-top: 1em">The argument
+must be attached to the option, as in the examples above. If
+a space separates them, rmw reads &rsquo;N_DAYS&rsquo; as
+the name of a file to remove.</p>
+
+<p style="margin-left:15%; margin-top: 1em">To purge from a
+scheduled job, keep &rsquo;expire_age&rsquo; at
+&rsquo;0&rsquo; so that normal runs never purge, and let a
+cron job give the number of days:</p>
+
+<p style="margin-left:15%; margin-top: 1em">30 4 * * 0 rmw
+-g45 &gt;&gt; &quot;$HOME/.local/state/rmw-purge.log&quot;
+2&gt;&amp;1</p>
+
+<p style="margin-left:15%; margin-top: 1em">See the FAQ for
+the full example, including log rotation:
+&lt;https://theimpossibleastronaut.github.io/rmw-website/faq.html#can-rmw-be-run-as-a-scheduled-job-to-purge-expired-files&gt;</p>
 
 <p style="margin-left:6%;"><b>-o</b>, <b>--orphaned</b></p>
 
@@ -213,6 +231,25 @@ that were last rmw&rsquo;ed</p>
 
 <p style="margin-left:15%;">list most recently rmw&rsquo;ed
 files</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:6%; margin-top: 1em">Each WASTE
+folder must be on its own line in the configuration file.
+Two WASTE folders cannot be specified on the same line. <br>
+WASTE=/mnt/flash/.Trash-$UID, removable</p>
+
+<p style="margin-left:15%;">When using the removable
+attribute, you must also manually create the directory</p>
+
+<p style="margin-left:6%;">expire_age = 45</p>
+
+<p style="margin-left:15%;">rmw will permanently delete
+files that have been in the waste (or trash) for more than
+45 days.</p>
 
 <h2>ENVIRONMENT
 <a name="ENVIRONMENT"></a>
@@ -344,6 +381,25 @@ that device (e.g. &quot;/mnt/flash/.Trash-$UID&quot;) and
 run rmw, it will automatically create the two required child
 directories &quot;files&quot; and &quot;info&quot;.</p>
 
+<h3>BTRFS AND BCACHEFS
+<a name="BTRFS AND BCACHEFS"></a>
+</h3>
+
+
+<p style="margin-left:6%; margin-top: 1em">rmw supports
+moving files across subvolumes on btrfs and bcachefs
+filesystems. Because the kernel reports subvolumes with
+different device numbers, a cross-subvolume move would
+normally fail with a cross-device error; rmw detects this
+case and performs a reflink clone-then-delete instead,
+preserving the expected trash semantics.</p>
+
+<p style="margin-left:6%; margin-top: 1em">To use this
+feature, define a WASTE directory on the destination
+subvolume in your configuration file. If your waste
+directory is on a different subvolume than the files you
+want to remove, rmw will handle the move transparently.</p>
+
 <h2>EXAMPLES
 <a name="EXAMPLES"></a>
 </h2>
@@ -357,24 +413,6 @@ directories &quot;files&quot; and &quot;info&quot;.</p>
 <p style="margin-left:6%; margin-top: 1em">rmw -z
 ˜/.local/share/Waste/files/foo <br>
 rmw -z ˜/.local/share/Waste/files/bars*</p>
-
-<h3>CONFIGURATION
-<a name="CONFIGURATION"></a>
-</h3>
-
-
-
-<p style="margin-left:6%; margin-top: 1em">WASTE=/mnt/flash/.Trash-$UID,
-removable</p>
-
-<p style="margin-left:15%;">When using the removable
-attribute, you must also manually create the directory</p>
-
-<p style="margin-left:6%;">expire_age = 45</p>
-
-<p style="margin-left:15%;">rmw will permanently delete
-files that have been in the waste (or trash) for more than
-45 days.</p>
 
 <h2>AUTHORS
 <a name="AUTHORS"></a>
@@ -419,3 +457,4 @@ rmdir(1)</p>
 <p style="margin-left:6%; margin-top: 1em">Full
 documentation at:
 &lt;https://theimpossibleastronaut.github.io/rmw-website/&gt;</p>
+<hr>
