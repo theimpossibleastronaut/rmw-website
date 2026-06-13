@@ -6,7 +6,10 @@ layout: default
 Anything that isn't covered here may be found on the <a
 href="extra_tips.html">Extra Tips</a> page.
 
-**What is your release cycle?**
+* TOC
+{:toc}
+
+### What is your release cycle?
 
 It varies, averaging once or twice a year. If bugs are found and
 reported, a release will happen sooner depending on the severity.
@@ -15,7 +18,7 @@ page](https://github.com/theimpossibleastronaut/rmw/milestones). The
 dates may change but Andy tries to keep them as up-to-date as
 possible.
 
-**Can rmw replace rm? Can I alias rmw to rm?**
+### Can rmw replace rm? Can I alias rmw to rm?
 
 I don't recommend it. Many other utilities use rm in the background and
 you'd wind up with a very full trash can. Also, rmw doesn't have the
@@ -23,7 +26,7 @@ same command line options as rm (see also: an <a
 href="https://github.com/theimpossibleastronaut/rmw/discussions/305">extended
 discussion</a>)
 
-**How do I know if rmw is compatible with my Desktop trash?**
+### How do I know if rmw is compatible with my Desktop trash?
 
 When rmw moves a file to a waste or trash directory, it also writes a
 *.trashinfo* file to the corresponding trash directory. The default
@@ -51,7 +54,7 @@ trashinfo format and directory layout is the same.
 If you're sure that your Desktop trash is compatible, you can add the
 appropriate line to your rmw configuration file.
 
-**Does rmw work on Windows?**
+### Does rmw work on Windows?
 
 Not yet. There's [an open
 ticket](https://github.com/theimpossibleastronaut/rmw/issues/71) for
@@ -59,7 +62,7 @@ that. But reportedly, rmw works well on the <a
 href="https://github.com/ethanhs/WSL-Programs">Windows Subsystem for
 Linux</a>.
 
-**Can I use wildcard and regex patterns with rmw?**
+### Can I use wildcard and regex patterns with rmw?
 
 Yes. For example:
 
@@ -72,7 +75,7 @@ Some complex regex expressions won't work. If you'd like support
 for a particular pattern that doesn't already work, please open a
 ticket.
 
-**Can rmw be run as a scheduled job to purge expired files?**
+### Can rmw be run as a scheduled job to purge expired files?
 
 Yes. The important rule: only the scheduled job should purge.
 
