@@ -74,11 +74,55 @@ ticket.
 
 **Can rmw be run as a scheduled job to purge expired files?**
 
-I wouldn't recommend it. It's never been tested that way, but more
-importantly, it could cause a <a
-href="https://devopedia.org/race-condition-software">race
-condition</a>. For example, if you manually run rmw at the same time
-it's being run by a task scheduler, rmw could have unpredictable
-results as it tries to read files that are in the process of being
-removed (the rare possibility of collision exists even though rmw
-usually only takes a few seconds or less to run).
+Yes, if you make the scheduled job the only thing that ever purges.
+Keep purging disabled in your configuration file (this is the
+default):
+
+<p class="w3-code">
+  expire_age = 0
+</p>
+
+With that setting, normal rmw runs never purge anything. Then let a
+cron job pass the age explicitly and append the output to a log:
+
+<p class="w3-code">
+  30 4 * * 0 rmw -g45 >> "$HOME/.local/state/rmw-purge.log" 2>&1
+</p>
+
+This permanently deletes waste items older than 45 days every Sunday
+at 04:30. A few things to watch for:
+
+- The number must be attached to the option: <code
+  class="w3-codespan">-g45</code> or <code
+  class="w3-codespan">--purge=45</code>. With a space in between,
+  rmw treats the number as a file to be trashed.
+- cron jobs run with a minimal PATH; use the full path to rmw if it's
+  installed somewhere like *~/.local/bin*.
+- If you've uncommented <code class="w3-codespan">force_required</code>
+  in your configuration file, add <code class="w3-codespan">-f</code>
+  to the command.
+
+Because interactive runs can't purge with this setup, two purges can
+never collide. A narrow window remains if you restore a file at the
+same moment the scheduled job is deleting it — the same small risk any
+desktop trash auto-cleaner has.
+
+To keep the log from growing, rotate it with logrotate. Since the log
+lives in your home directory, use a small user-level configuration
+(absolute path required, e.g. *~/.config/rmw/logrotate.conf*):
+
+<p class="w3-code">
+  /home/you/.local/state/rmw-purge.log {<br />
+  &nbsp;&nbsp;monthly<br />
+  &nbsp;&nbsp;rotate 3<br />
+  &nbsp;&nbsp;compress<br />
+  &nbsp;&nbsp;missingok<br />
+  &nbsp;&nbsp;notifempty<br />
+  }
+</p>
+
+and run it from the same crontab:
+
+<p class="w3-code">
+  0 5 * * 0 logrotate --state "$HOME/.local/state/logrotate-rmw.state" "$HOME/.config/rmw/logrotate.conf"
+</p>
