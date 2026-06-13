@@ -74,42 +74,48 @@ ticket.
 
 **Can rmw be run as a scheduled job to purge expired files?**
 
-Yes, if you make the scheduled job the only thing that ever purges.
-Keep purging disabled in your configuration file (this is the
-default):
+Yes. The important rule: only the scheduled job should purge.
+
+In your configuration file, keep purging disabled (this is the
+default setting):
 
 <p class="w3-code">
   expire_age = 0
 </p>
 
-With that setting, normal rmw runs never purge anything. Then let a
-cron job pass the age explicitly and append the output to a log:
+With this setting, rmw never purges when you run it normally. Instead,
+a cron job gives the number of days on the command line and writes the
+output to a log file:
 
 <p class="w3-code">
   30 4 * * 0 rmw -g45 >> "$HOME/.local/state/rmw-purge.log" 2>&1
 </p>
 
-This permanently deletes waste items older than 45 days every Sunday
-at 04:30. A few things to watch for:
+This job runs every Sunday at 04:30. It permanently deletes waste
+items that are older than 45 days.
 
-- The number must be attached to the option: <code
+Important details:
+
+- Write the number directly after the option: <code
   class="w3-codespan">-g45</code> or <code
-  class="w3-codespan">--purge=45</code>. With a space in between,
-  rmw treats the number as a file to be trashed.
-- cron jobs run with a minimal PATH; use the full path to rmw if it's
-  installed somewhere like *~/.local/bin*.
-- If you've uncommented <code class="w3-codespan">force_required</code>
-  in your configuration file, add <code class="w3-codespan">-f</code>
-  to the command.
+  class="w3-codespan">--purge=45</code>. Do not put a space between
+  them. With a space, rmw reads the number as the name of a file to
+  delete.
+- cron uses a short PATH. If rmw is installed in a place like
+  *~/.local/bin*, write the full path to rmw in the cron line.
+- If your configuration file contains <code
+  class="w3-codespan">force_required</code>, add <code
+  class="w3-codespan">-f</code> to the command.
 
-Because interactive runs can't purge with this setup, two purges can
-never collide. A narrow window remains if you restore a file at the
-same moment the scheduled job is deleting it — the same small risk any
-desktop trash auto-cleaner has.
+With this setup, two purges can never run at the same time. One small
+risk remains: you could restore a file at the same moment the job
+deletes it. Desktop trash cleaners have the same small risk.
 
-To keep the log from growing, rotate it with logrotate. Since the log
-lives in your home directory, use a small user-level configuration
-(absolute path required, e.g. *~/.config/rmw/logrotate.conf*):
+To stop the log file from growing forever, use logrotate. The log is
+in your home directory, so use your own logrotate configuration file,
+for example *~/.config/rmw/logrotate.conf*. Write the full path to the
+log file; logrotate does not understand <code
+class="w3-codespan">$HOME</code>:
 
 <p class="w3-code">
   /home/you/.local/state/rmw-purge.log {<br />
