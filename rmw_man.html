@@ -2,8 +2,6 @@
 title: rmw manual
 layout: default
 ---
-<!-- Creator     : groff version 1.24.1 -->
-<!-- CreationDate: Fri Jun 12 20:42:38 2026 -->
 <h1 align="center">RMW</h1>
 
 <a href="#NAME">NAME</a><br>
@@ -88,7 +86,13 @@ configuration</p>
 
 <p style="margin-left:6%;"><b>-l</b>, <b>--list</b></p>
 
-<p style="margin-left:15%;">list waste directories</p>
+<p style="margin-left:15%;">list waste directories, one
+path per line</p>
+
+<p style="margin-left:15%; margin-top: 1em">Add <b>-v</b>
+to also show each folder&rsquo;s attributes (such as
+&quot;no-add&quot;) and a list of candidate trash locations
+that rmw would create on other file systems when needed.</p>
 
 <p style="margin-left:6%;"><b>-g[N_DAYS]</b>,
 <b>--purge</b>[=<i>N_DAYS</i>]</p>
@@ -136,7 +140,14 @@ item in a waste directory that has no corresponding
 <b>.trashinfo</b> file, or vice versa. This option is
 intended primarily for developers. Orphans may happen while
 testing code changes or if rmw is unintentionally released
-with a bug. <br>
+with a bug.</p>
+
+<p style="margin-left:15%; margin-top: 1em">A file that has
+no <b>.trashinfo</b> is repaired by <b>-o</b> alone (a new
+<b>.trashinfo</b> is created for it). Deleting the opposite
+kind of orphan, a <b>.trashinfo</b> with no matching file,
+is only done during a purge and requires force to be given
+twice, as in <b>rmw -offg</b> (<b>-o -f -f -g</b>). <br>
 (see also:
 &lt;https://theimpossibleastronaut.github.io/rmw-website/faq.html#dot_trashinfo&gt;)</p>
 
@@ -237,13 +248,34 @@ files</p>
 </h2>
 
 
-<p style="margin-left:6%; margin-top: 1em">Each WASTE
-folder must be on its own line in the configuration file.
-Two WASTE folders cannot be specified on the same line. <br>
+<p style="margin-left:6%; margin-top: 1em">Configuration is
+optional. With no configured WASTE folder, rmw moves each
+file to the trash on the file&rsquo;s own filesystem: files
+on the home filesystem go to the FreeDesktop home trash
+(˜/.local/share/Trash, the same trash your desktop uses),
+and files on other filesystems go to a trash at the top of
+that filesystem. These are created when first needed.</p>
+
+<p style="margin-left:6%; margin-top: 1em">Add WASTE lines
+only for special cases, such as keeping rmw&rsquo;s files
+separate from the desktop trash (uncomment the <b>WASTE =
+$HOME/.local/share/Waste</b> line in the generated config),
+a folder on removable media, or a <b>no-add</b> folder. Each
+WASTE folder must be on its own line; two WASTE folders
+cannot be specified on the same line. <br>
 WASTE=/mnt/flash/.Trash-$UID, removable</p>
 
 <p style="margin-left:15%;">When using the removable
 attribute, you must also manually create the directory</p>
+
+<p style="margin-left:6%;">WASTE = /path, no-add</p>
+
+<p style="margin-left:15%;">The &quot;no-add&quot;
+attribute tells rmw to never move files into this folder.
+rmw still lists it, restores files from it, and purges old
+files in it. This is useful for a folder you want to empty
+over time but no longer add to. You can combine attributes,
+for example &quot;removable, no-add&quot;.</p>
 
 <p style="margin-left:6%;">expire_age = 45</p>
 
@@ -292,51 +324,57 @@ items that were last rmw&rsquo;ed</p>
 </h2>
 
 
-<p style="margin-left:6%; margin-top: 1em">rmw will not
-move items from one file system to another. If you try to
-rmw a file but don&rsquo;t have a waste directory defined in
-your configuration file that matches the file system on
-which it resides, rmw will refuse to do anything with
+<p style="margin-left:6%; margin-top: 1em">rmw does not
+move items from one file system to another. When you rmw a
+file, it looks for a waste directory on the same file
+system. It checks the waste directories in your
+configuration file first. If none match, it uses the trash
+for that file system, as described by the FreeDesktop.org
+Trash specification: the home trash (˜/.local/share/Trash)
+for files on the home file system, or a trash at the top of
+the file system (for example,
+&quot;/mnt/disk/.Trash-1000&quot;) for other file systems.
+If one already exists, rmw uses it; if not, rmw creates
 it.</p>
+
+<p style="margin-left:6%; margin-top: 1em">rmw does not
+create a trash directory on file systems that are not meant
+to hold one, such as temporary (tmpfs) or network file
+systems. On those, if no configured waste directory matches,
+rmw refuses to remove the file, the same way desktop file
+managers do. A trash directory that already exists on such a
+file system is still used.</p>
+
+<p style="margin-left:6%; margin-top: 1em">Because the
+default home trash is the same one your desktop uses,
+enabling purging (an <b>expire_age</b> greater than 0) lets
+rmw permanently delete old items that your file manager
+placed in the trash too, not only items removed with rmw.
+Purging is off by default.</p>
 
 <h3>DESKTOP INTEGRATION
 <a name="DESKTOP INTEGRATION"></a>
 </h3>
 
 
-<p style="margin-left:6%; margin-top: 1em">Items will be
-moved to a waste basket in the same manner as when using the
-&quot;move to trash&quot; option from your desktop GUI. They
-will be separated from your desktop trash by default; or if
-you wish for them to share the same &quot;trash&quot;
-directory, uncomment the line (in your config file):</p>
+<p style="margin-left:6%; margin-top: 1em">Items are moved
+to the trash in the same manner as the &quot;move to
+trash&quot; option in your desktop file manager. By default
+rmw uses the same trash your desktop uses (the FreeDesktop
+home trash, ˜/.local/share/Trash), so an item removed with
+rmw appears in your desktop trash and can be restored from
+either one.</p>
 
-<p style="margin-left:6%; margin-top: 1em">(Note that this
-does not apply to MacOS; while rmw is yet unable to
-integrate with the desktop trash directory, you&rsquo;ll
-still be able to use the default Waste directory.)</p>
-
-<p style="margin-left:15%; margin-top: 1em">WASTE =
-$HOME/.local/share/Trash</p>
-
-<p style="margin-left:6%; margin-top: 1em">then comment out
-the line</p>
+<p style="margin-left:6%; margin-top: 1em">To keep
+rmw&rsquo;s files separate from the desktop trash instead,
+uncomment this line in your configuration file:</p>
 
 <p style="margin-left:15%; margin-top: 1em">WASTE =
 $HOME/.local/share/Waste</p>
 
-<p style="margin-left:6%; margin-top: 1em">You can reverse
-which directories are enabled at any time if you ever change
-your mind. If both directories are on the same filesystem,
-rmw will use the directory listed first in your config
-file.</p>
-
-<p style="margin-left:6%; margin-top: 1em">It can be
-beneficial to have them both uncommented. If your desktop
-trash directory (˜/.local/share/Trash) is listed after the
-rmw default (˜/.local/share/Waste) and uncommented, rmw
-will place newly rmw&rsquo;ed items into the default, and it
-will purge expired files from both.</p>
+<p style="margin-left:6%; margin-top: 1em">(On macOS rmw
+does not integrate with the system trash; the default
+˜/.local/share/Trash is used.)</p>
 
 <p style="margin-left:6%; margin-top: 1em">When
 rmw&rsquo;ing an item, if a file or directory with the same

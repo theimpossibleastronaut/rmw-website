@@ -54,11 +54,60 @@ trashinfo format and directory layout is the same.
 If you're sure that your Desktop trash is compatible, you can add the
 appropriate line to your rmw configuration file.
 
+### How does rmw choose which waste folder to use?
+
+*(since 0.10.0)*
+
+rmw works with no configuration. It moves a removed file to a trash folder
+on the same file system as the file; it does not copy files between file
+systems. To pick one, rmw looks in this order:
+
+1. The waste folders in your configuration file, if you set any.
+2. The [FreeDesktop.org Trash
+   specification](https://specifications.freedesktop.org/trash-spec/trashspec-latest.html)
+   trash for that file system: the home trash (<code
+   class="w3-codespan">~/.local/share/Trash</code>, the same trash your
+   desktop uses) for files on your home file system, or a trash at the top
+   of the file system (for example, <code
+   class="w3-codespan">/mnt/disk/.Trash-1000</code>) for other file systems.
+   If one already exists, rmw uses it; if not, rmw creates it when first
+   needed.
+
+rmw does not create a trash folder on file systems that are not meant to
+hold one, such as temporary (<code class="w3-codespan">tmpfs</code>) or
+network file systems. On those, if no configured waste folder matches,
+rmw does not remove the file. This is the same as how your desktop file
+manager behaves. A trash folder that is already present on such a file
+system is still used.
+
+To keep rmw's files separate from the desktop trash, uncomment <code
+class="w3-codespan">WASTE = $HOME/.local/share/Waste</code> in your
+configuration file.
+
+Run <code class="w3-codespan">rmw -l</code> to list the waste folders rmw
+knows about, or <code class="w3-codespan">rmw -lv</code> to also see the
+trash folders rmw would create on other file systems.
+
+### Can I keep a waste folder but stop putting new files in it?
+
+*(since 0.10.0)*
+
+Yes. Add the <code class="w3-codespan">no-add</code> attribute to the
+folder in your configuration file:
+
+<p class="w3-code">
+  WASTE = /path/to/folder, no-add
+</p>
+
+rmw will not move new files into a <code class="w3-codespan">no-add</code>
+folder, but it still lists the folder, restores files from it, and purges
+old files in it. This is useful when you want to empty an old waste folder
+over time without adding anything new to it.
+
 ### Does rmw work on Windows?
 
-Not yet. There's [an open
-ticket](https://github.com/theimpossibleastronaut/rmw/issues/71) for
-that. But reportedly, rmw works well on the <a
+No, and native Windows support is not planned. rmw targets POSIX systems
+(Linux, the BSDs, and macOS). It does run on the <a
 href="https://github.com/ethanhs/WSL-Programs">Windows Subsystem for
 Linux</a>.
 
