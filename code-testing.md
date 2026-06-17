@@ -15,6 +15,13 @@ cover most of rmw's operations. If there's a test missing, please open
 a ticket.
 
 <h2 id="env_vars">Environmental Variables</h2>
+<div class="w3-panel w3-pale-red w3-leftbar w3-border-red">
+  <p>These variables are set by rmw's meson test suite to run the code in a
+  controlled environment. They are not meant for normal use. Setting them
+  yourself is strongly discouraged and can make rmw behave in unexpected
+  ways.</p>
+</div>
+
 <div class="w3-panel w3-border">
   <p><b>RMW_DISCOVERY</b> (v0.10.0)</p>
 By default, rmw scans the real mount points on your machine to find
