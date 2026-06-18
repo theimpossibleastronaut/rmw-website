@@ -23,5 +23,5 @@ There are no tests or linters.
 
 ## Gotchas
 
-- `rmw_man.html` is groff-generated from the man page in the rmw source repo — regenerate it there, don't hand-edit it.
+- `rmw_man.md` is generated from the rmw source repo's `MANUAL.md` (the single source for both the `rmw(1)` man page and this page). Don't hand-edit it — run `./sync-manual.sh` after `MANUAL.md` changes upstream. Jekyll renders it to `rmw_man.html` (the URL the nav and `index.md` link to).
 - The `dot_trashinfo` anchor in `faq.md` is linked from the rmw man page. Don't rename or remove it, and treat other heading anchors as public URLs once published.
