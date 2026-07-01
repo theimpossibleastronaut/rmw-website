@@ -3,6 +3,11 @@ title: Website Design
 layout: default
 ---
 
+This website has its own repository, separate from the rmw program
+code: [{{ site.repo_url }}]({{ site.repo_url }}). Changes to the
+website go there. Changes to the program go to the code repository at
+[https://github.com/theimpossibleastronaut/rmw](https://github.com/theimpossibleastronaut/rmw).
+
 Please refer to the [contributing
 guidelines](https://github.com/theimpossibleastronaut/rmw/blob/master/CONTRIBUTING.md)
 for the general flow of this project and procedure for sending pull
