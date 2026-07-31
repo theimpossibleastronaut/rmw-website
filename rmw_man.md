@@ -15,7 +15,7 @@ rmw - safe-remove utility for the command line
 
 **rmw** [*OPTION*]... *FILE*...
 
-Move FILE(s) to a WASTE directory listed in configuration file
+Move FILE(s) to the trash
 
 **rmw** `-s`
 
@@ -23,16 +23,14 @@ Move FILE(s) to a WASTE directory listed in configuration file
 
 **rmw** `-z` *FILE*...
 
-Restore FILE(s) from a WASTE directory
+Restore FILE(s) from the trash
 
 ### DESCRIPTION
 
-rmw (ReMove to Waste) is a trashcan/recycle bin utility for the command line.
-It can move and restore files to and from directories specified in a
-configuration file, and can also be integrated with your regular desktop trash
-folder (if your desktop environment uses the FreeDesktop.org Trash
-specification). One of the unique features of rmw is the ability to purge
-items from your waste (or trash) directories after x number of days.
+rmw (ReMove to Waste) is a safe-remove and restore utility for the command
+line. By default it uses your desktop's trash (the FreeDesktop.org Trash
+specification) and needs no setup, though you can add your own waste folders.
+It can also purge items after a set number of days.
 
 ### OPTIONS
 
@@ -130,6 +128,14 @@ items from your waste (or trash) directories after x number of days.
     left/right cursor keys to switch between waste directories. Use the
     space bar to select the items you wish to restore, then press enter to
     restore all selected items.
+
+    The list opens on the waste directory of your current filesystem. If
+    no waste directory is on that filesystem, it opens on the first one in
+    your list instead.
+
+    When the output is not a terminal (for example, piped to another
+    program), rmw does not open the menu. Instead it prints the path of
+    that waste directory, followed by the names of the items in it.
 
 `-u`, `--undo-last`
 : undo last move
@@ -299,7 +305,7 @@ Report bugs to <https://github.com/theimpossibleastronaut/rmw/issues>.
 
 ### COPYRIGHT
 
-Copyright © 2012-2025 Andy Alt
+Copyright © 2012-2026 Andy Alt
 
 License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
 This is free software: you are free to change and redistribute it.
