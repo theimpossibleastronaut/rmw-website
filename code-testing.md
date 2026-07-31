@@ -9,10 +9,21 @@ layout: default
 
 <h2 id="general_testing">General Testing</h2>
 
-Using <code class="w3-codespan">ninja test</code> and <code
-class="w3-codespan">meson test --setup=fake_media_root</code> will
-cover most of rmw's operations. If there's a test missing, please open
-a ticket.
+Run <code class="w3-codespan">meson test</code> from your build
+directory. This covers most of rmw's operations. Some tests need a
+tool or a permission that your system may not have; those report
+<code class="w3-codespan">SKIP</code> instead of failing.
+
+If <a
+href="https://github.com/wolfcw/libfaketime">faketime</a> is installed,
+you can also run the tests with a clock set 14 years ahead. This checks
+that rmw still handles dates correctly after the year 2038:
+
+<p class="w3-code">
+meson test --setup=epochalypse
+</p>
+
+If there's a test missing, please open a ticket.
 
 <h2 id="env_vars">Environmental Variables</h2>
 
